@@ -1,16 +1,21 @@
 # rts.js
 
-rts.js is a small library (TODO add source size / gzipped size info) that allows you to define complex types in JavaScript, 
+rts.js is a small library that allows you to define complex types in JavaScript, 
 check them during runtime, debug type related issues using Chrome DevTools 
 and serialize/deserialize your domain objects to JSON.
 
-## Examples
+## What kind of types I can check?
 
-TODO
+Basic types
 
-## Tests
-
-TODO
+- Nil
+- Bool
+- Num
+- Str
+- Arr
+- Obj
+- Func
+- Err
 
 ## Copyright & License
 
