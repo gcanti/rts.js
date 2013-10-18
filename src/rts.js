@@ -53,7 +53,7 @@
     }
 
     Num.is = function (x) {
-        return ( typeof x === 'number' || ( x && x.constructor === Number ) ) &&
+        return ( typeof x === 'number' || ( x !== null && x.constructor === Number ) ) &&
             isFinite(x) &&
             !isNaN(x);
     };
@@ -70,7 +70,7 @@
     }
 
     Str.is = function (x) {
-        return typeof x === 'string' || ( x && x.constructor === String );
+        return typeof x === 'string' || ( x !== null && x.constructor === String );
     };
 
     Str.of = Str;
@@ -150,4 +150,4 @@
         Err: Err
     };
 
-})(typeof exports !== 'undefined' ? exports : window.rts = {});
+})(typeof exports !== 'undefined' ? exports : window);

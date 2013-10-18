@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>rts.js - Browser runner</title>
+        <link type="text/css" rel="stylesheet" href="lib/mocha.css"/>
+        <script type="text/javascript" src="lib/mocha.js"></script>
+        <script type="text/javascript" src="../src/rts.js"></script>
+        <script type="text/javascript" src="specs/all.js"></script>
+    </head>
+    <body>
+        <div id="mocha"></div>
+        <script type="text/javascript">
+            var ok = rts.assert;
+            var ko = function (x) {
+                rts.assert(!x);
+            };
+            mocha.setup('bdd');
+            specs(rts, ok, ko);
+            mocha.run();
+        </script>
+    </body>
+</html>
