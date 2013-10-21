@@ -12,6 +12,8 @@ Bonus points: Chrome DevTools debugging, serialization/deserialization of your d
 
 What kind of types can I check?
 
+Basic types
+
 - Nil
 - Bool
 - Num
@@ -20,6 +22,17 @@ What kind of types can I check?
 - Obj
 - Func
 - Err
+
+Type combinators
+
+- Subtype
+- Enum
+- List
+- Union
+- Maybe
+- Tuple
+- Dict
+- Interface
 
 ## How?
 
@@ -30,13 +43,51 @@ the debugger starts only once.
 
 ## Quick Examples
 
+    // basic types
     Nil.is(null);       // true
     Nil.is(undefined);  // true
 
     Num.is(1);      // true
     Num.is('str');  // false
 
-    // cartesian coordinates
+    // subtype
+    var Positive = Subtype(Num, function (n) {
+        return n > 0;
+    });
+    Positive.is(1); // true
+    Positive.is(0); // false
+
+    // enum
+    Enum(['a', 'b', 'c']).is('a');  // true
+    Enum(['a', 'b', 'c']).is(1);    // false
+
+    // list
+    List(Str).is(['a', 'b', 'c']);  // true
+    List(Str).is(['a', 1, 'c']);    // false
+
+    // Union
+    Union([Str, Num]).is('a');  // true
+    Union([Str, Num]).is(1);    // true
+    Union([Str, Num]).is(true); // false
+
+    // Maybe
+    Maybe(Str).is(null);    // true
+    Maybe(Str).is('a');     // true
+    Maybe(Str).is(1);       // false
+
+    // tuple
+    Tuple([Str, Num]).is(['a', 1]);     // true
+    Tuple([Str, Num]).is(['a', 'b']);   // false
+
+    // dictionary
+    Dict(Str, Num).is({'a': 1});    // true
+    Dict(Str, Num).is({'a': true}); // false
+
+    // duck typing
+    Interface({a: Str, b: Num}).is({a: 'str', b: 1});       // true
+    Interface({a: Str, b: Num}).is({a: 'str', b: true});    // false
+
+    // a custom type: cartesian product set Num x Num
     function Point(x, y) {
         assert(Num.is(x));
         assert(Num.is(y));
@@ -50,11 +101,14 @@ the debugger starts only once.
 
     Point.of = function (json) {
         assert(Obj.is(json));
-        return new Point(json.x, json.y);
+        return new Point(
+            Num.of(json.x), 
+            Num.of(json.y)
+        );
     }
 
     var p1 = new Point(1, 2);           // build a point
-    var p2 = new Point(1, 'a');         // starts the debugger, because of the second param
+    var p2 = new Point(1, 'a');         // starts the debugger, because of the second argument
     var p3 = Point.of({x: 1, y: 2});    // build a point from JSON
 
 ## Setup

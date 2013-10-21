@@ -10,6 +10,14 @@
         var Obj = rts.Obj;
         var Func = rts.Func;
         var Err = rts.Err;
+        var Subtype = rts.Subtype;
+        var Enum = rts.Enum;
+        var List = rts.List;
+        var Union = rts.Union;
+        var Maybe = rts.Maybe;
+        var Tuple = rts.Tuple;
+        var Dict = rts.Dict;
+        var Interface = rts.Interface;
 
         //
         // basic types specs
@@ -176,6 +184,104 @@
                     ko(Err.is(new Boolean()));
                     ko(Err.is(/a/));
                     ko(Err.is(new RegExp('a')));
+                });
+            });
+        });
+
+        describe('Subtype', function(){
+            describe('#is(x)', function(){
+                var Positive = Subtype(Num, function (n) {
+                    return n > 0;
+                });
+                it('should return true when x belongs to the subtype', function(){
+                    ok(Positive.is(1));
+                });
+                it("should return false when x don't belongs to the subtype", function(){
+                    ko(Positive.is(0));
+                });
+            });
+        });
+
+        describe('Enum', function(){
+            describe('#is(x)', function(){
+                var e = Enum(['a', 'b', 'c']);
+                it('should return true when x belongs to the enum', function(){
+                    ok(e.is('a'));
+                });
+                it("should return false when x don't belongs to the enum", function(){
+                    ko(e.is('d'));
+                });
+            });
+        });
+
+        describe('List', function(){
+            describe('#is(x)', function(){
+                it('should return true when x is an array of elements of type T', function(){
+                    ok(List(Str).is(['a', 'b', 'c']));
+                });
+                it('should return true when x is not an array of elements of type T', function(){
+                    ko(List(Str).is(['a', 1, 'c']));
+                });
+            });
+        });
+
+        describe('Union', function(){
+            describe('#is(x)', function(){
+                it('should return true when x is any of the types TS', function(){
+                    ok(Union([Str, Num]).is('a'));
+                    ok(Union([Str, Num]).is(1));
+                });
+                it('should return true when x is none of the types TS', function(){
+                    ko(Union([Str, Num]).is(true));
+                });
+            });
+        });
+
+        describe('Maybe', function(){
+            describe('#is(x)', function(){
+                it('should return true when x is either null, undefined or of type T', function(){
+                    ok(Maybe(Str).is(null));
+                    ok(Maybe(Str).is(undefined));
+                    ok(Maybe(Str).is('a'));
+                    ok(Maybe(List(Str)).is(undefined));
+                    ok(Maybe(List(Str)).is(['a']));
+                });
+                it('should return true when x is none of null, undefined nor of type T', function(){
+                    ko(Maybe(Str).is(1));
+                });
+            });
+        });
+
+        describe('Tuple', function(){
+            describe('#is(x)', function(){
+                it('should return true when x is a tuple', function(){
+                    ok(Tuple([Str, Num]).is(['a', 1]));
+                });
+                it('should return true when x is not a tuple', function(){
+                    ko(Tuple([Str, Num]).is(['a', 'b']));
+                });
+            });
+        });
+
+        describe('Dict', function(){
+            describe('#is(x)', function(){
+                it('should return true when x is a dict', function(){
+                    ok(Dict(Str, Num).is({'a': 1}));
+                });
+                it('should return true when x is not a dict', function(){
+                    ko(Dict(Str, Num).is({'a': true}));
+                });
+            });
+        });
+
+        describe('Interface', function(){
+            describe('#is(x)', function(){
+                it('should return true when x has a proper structure', function(){
+                    ok(Interface({a: Str, b: Num}).is({a: 'str', b: 1}));
+                    ok(Interface({a: Str, b: Maybe(Num)}).is({a: 'str'}));
+                });
+                it('should return true when x has a not proper structure', function(){
+                    ko(Interface({a: Str, b: Num}).is({a: 'str', b: true}));
                 });
             });
         });
