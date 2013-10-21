@@ -133,10 +133,7 @@
         return x instanceof Error;
     };
 
-    Err.of = function (x) {
-        assert( Obj.is(x) );
-        return mixin(new Error(), x);
-    };
+    Err.of = Err;
 
     //
     // Subtype. A subtype of type T by p is the set of elements of T that satisfy 
