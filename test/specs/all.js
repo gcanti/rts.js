@@ -50,6 +50,7 @@
                 });
                 it('should return false when x is neither true nor false', function(){
                     ko(Bool.is(null));
+                    ko(Bool.is(undefined));
                     ko(Bool.is(0));
                     ko(Bool.is(''));
                     ko(Bool.is([]));
@@ -73,6 +74,7 @@
                     ko(Num.is(Infinity));
                     ko(Num.is(-Infinity));
                     ko(Num.is(null));
+                    ko(Num.is(undefined));
                     ko(Num.is(true));
                     ko(Num.is(''));
                     ko(Num.is([]));
@@ -96,6 +98,7 @@
                     ko(Str.is(Infinity));
                     ko(Str.is(-Infinity));
                     ko(Str.is(null));
+                    ko(Str.is(undefined));
                     ko(Str.is(true));
                     ko(Str.is(1));
                     ko(Str.is([]));
@@ -117,6 +120,7 @@
                     ko(Arr.is(Infinity));
                     ko(Arr.is(-Infinity));
                     ko(Arr.is(null));
+                    ko(Arr.is(undefined));
                     ko(Arr.is(true));
                     ko(Arr.is(1));
                     ko(Arr.is('a'));
@@ -135,6 +139,7 @@
                 });
                 it('should return false when x is not an object literal', function(){
                     ko(Obj.is(null));
+                    ko(Obj.is(undefined));
                     ko(Obj.is(0));
                     ko(Obj.is(''));
                     ko(Obj.is([]));
@@ -156,6 +161,7 @@
                 });
                 it('should return false when x is not a function', function(){
                     ko(Func.is(null));
+                    ko(Func.is(undefined));
                     ko(Func.is(0));
                     ko(Func.is(''));
                     ko(Func.is([]));
@@ -175,6 +181,7 @@
                 });
                 it('should return false when x is not a function', function(){
                     ko(Err.is(null));
+                    ko(Err.is(undefined));
                     ko(Err.is(0));
                     ko(Err.is(''));
                     ko(Err.is([]));

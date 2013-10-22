@@ -111,6 +111,8 @@ the debugger starts only once.
     var p2 = new Point(1, 'a');         // starts the debugger, because of the second argument
     var p3 = Point.of({x: 1, y: 2});    // build a point from JSON
 
+More examples in `/examples`.
+
 ## Setup
 
 Node.js

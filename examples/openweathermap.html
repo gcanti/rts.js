@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>rts.js - openweathermap example</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="../src/rts.js"></script>
+        <script type="text/javascript" src="openweathermap.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#go').click(function () {
+                    var name = $('#name').val();
+                    $.getJSON( "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(name) + '&callback=?', function (data) {
+                        data = openweathermap.Result.of(data);
+                        $('#result').html(data.to_html());
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        City: <input id="name" type="text" value="Milano"/>
+        <button id="go">go</button>
+        <div id="result"></div>
+    </body>
+</html>
