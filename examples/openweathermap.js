@@ -136,7 +136,7 @@
         ].join('');
     };
 
-    // api can return an error
+    // according to the documentation this api may return an error
     var Result = Union([WeatherData, ApiError]);
 
     Result.of = function (x) {

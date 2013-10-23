@@ -76,7 +76,7 @@
     Str.of = Str;
 
     //
-    // Arr represent an array whose elements can be of different types
+    // Arr represent an array whose elements may be of different types
     //
 
     function Arr(x) {
@@ -162,7 +162,7 @@
     }
 
     //
-    // Enum. An enum is an estensive definition of a Str subtype
+    // Enum. An enum is an extensional definition of a Str subtype
     //
 
     function to_obj(a) {
@@ -237,7 +237,7 @@
     }
 
     //
-    // Union of types
+    // Sum type
     //
 
     function Union(TS) {
@@ -267,7 +267,7 @@
     }
 
     //
-    // Haskell like Maybe, a special case of Union
+    // Haskell-like Maybe, a special case of Union
     //
 
     function Maybe(T) {
@@ -327,7 +327,7 @@
     }
 
     //
-    // dictionary K -> V, where K is a subtype of Str
+    // dictionary K -> V, when K is a subtype of Str
     //
 
     function Dict(K, V) {
