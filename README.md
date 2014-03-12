@@ -14,6 +14,7 @@ What kind of types can I check?
 
 Basic types
 
+- Any
 - Nil
 - Bool
 - Num
@@ -58,17 +59,17 @@ the debugger starts only once.
     Positive.is(0); // false
 
     // enum
-    Enum(['a', 'b', 'c']).is('a');  // true
-    Enum(['a', 'b', 'c']).is(1);    // false
+    Enum('a', 'b', 'c').is('a');  // true
+    Enum('a', 'b', 'c').is(1);    // false
 
     // list
     List(Str).is(['a', 'b', 'c']);  // true
     List(Str).is(['a', 1, 'c']);    // false
 
     // Union
-    Union([Str, Num]).is('a');  // true
-    Union([Str, Num]).is(1);    // true
-    Union([Str, Num]).is(true); // false
+    Union(Str, Num).is('a');  // true
+    Union(Str, Num).is(1);    // true
+    Union(Str, Num).is(true); // false
 
     // Maybe
     Maybe(Str).is(null);    // true
@@ -76,8 +77,8 @@ the debugger starts only once.
     Maybe(Str).is(1);       // false
 
     // tuple
-    Tuple([Str, Num]).is(['a', 1]);     // true
-    Tuple([Str, Num]).is(['a', 'b']);   // false
+    Tuple(Str, Num).is(['a', 1]);     // true
+    Tuple(Str, Num).is(['a', 'b']);   // false
 
     // dictionary
     Dict(Str, Num).is({'a': 1});    // true

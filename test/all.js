@@ -211,7 +211,7 @@
 
         describe('Enum', function(){
             describe('#is(x)', function(){
-                var e = Enum(['a', 'b', 'c']);
+                var e = Enum('a', 'b', 'c');
                 it('should return true when x belongs to the enum', function(){
                     ok(e.is('a'));
                 });
@@ -235,11 +235,11 @@
         describe('Union', function(){
             describe('#is(x)', function(){
                 it('should return true when x is any of the types TS', function(){
-                    ok(Union([Str, Num]).is('a'));
-                    ok(Union([Str, Num]).is(1));
+                    ok(Union(Str, Num).is('a'));
+                    ok(Union(Str, Num).is(1));
                 });
                 it('should return true when x is none of the types TS', function(){
-                    ko(Union([Str, Num]).is(true));
+                    ko(Union(Str, Num).is(true));
                 });
             });
         });
@@ -262,10 +262,10 @@
         describe('Tuple', function(){
             describe('#is(x)', function(){
                 it('should return true when x is a tuple', function(){
-                    ok(Tuple([Str, Num]).is(['a', 1]));
+                    ok(Tuple(Str, Num).is(['a', 1]));
                 });
                 it('should return true when x is not a tuple', function(){
-                    ko(Tuple([Str, Num]).is(['a', 'b']));
+                    ko(Tuple(Str, Num).is(['a', 'b']));
                 });
             });
         });

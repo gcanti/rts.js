@@ -13,6 +13,16 @@
         return guard;
     }
 
+    function Any(x) {
+        return x;
+    }
+
+    Any.is = function () {
+        return true;
+    };
+
+    Any.of = Any;
+
     //
     // Nil is either null or undefined
     //
@@ -174,8 +184,13 @@
         return o;
     }
 
-    function Enum(elements) {
+    function slice(a) {
+        return Array.prototype.slice.call(a);
+    }
 
+    function Enum() {
+
+        var elements = slice(arguments);
         assert( List(Str).is(elements) );
 
         function Enum(x) {
@@ -240,8 +255,9 @@
     // Sum type
     //
 
-    function Union(TS) {
+    function Union() {
 
+        var TS = slice(arguments);
         assert( List(Func).is( TS ) );
 
         function Union(x) {
@@ -272,7 +288,7 @@
 
     function Maybe(T) {
 
-        var Maybe = Union([Nil, T]);
+        var Maybe = Union(Nil, T);
 
         Maybe.of = function (x) {
             return Nil.is(x) ? null : T.of(x);
@@ -286,8 +302,9 @@
     // Tuples
     //
 
-    function Tuple(TS) {
+    function Tuple() {
 
+        var TS = slice(arguments);
         assert( List(Func).is( TS ) );
 
         var len = TS.length;
@@ -404,6 +421,7 @@
 
     exports.rts = {
         assert: assert,
+        Any: Any,
         Nil: Nil,
         Bool: Bool,
         Num: Num,

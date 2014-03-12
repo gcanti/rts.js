@@ -1,7 +1,6 @@
-var assert = require("assert");
 var rts = require('../src/rts.js').rts;
-var ok = assert.ok;
+var ok = rts.assert;
 var ko = function (x) {
-    assert.ok(!x);
+    rts.assert(!x);
 };
-require("./specs/all").specs(rts, ok, ko);
+require("./all").specs(rts, ok, ko);
