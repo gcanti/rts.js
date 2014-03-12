@@ -137,7 +137,7 @@
     };
 
     // according to the documentation this api may return an error
-    var Result = Union([WeatherData, ApiError]);
+    var Result = Union(WeatherData, ApiError);
 
     Result.of = function (x) {
         return Nil.is(x.message) ? WeatherData.of(x) : ApiError.of(x);
