@@ -144,7 +144,7 @@ Browsers
 
 Open `test/browser_runner.html`.
 
-## Copyright & License
+# Copyright & License
 
 Copyright (C) 2013 Giulio Canti - Released under the MIT License.
 
